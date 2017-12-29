@@ -9,6 +9,9 @@ import { Item } from '../../models/item';
 })
 export class ItemsComponent implements OnInit {
   items: Item[];
+  editState = false; // typescript will infer the type based on the data
+  itemToEdit: Item;
+
 
   constructor(private itemService: ItemService) { }
 
@@ -20,8 +23,24 @@ export class ItemsComponent implements OnInit {
     });
   }
 
-  deleteItem(event, item) {
+  updateItem(item: Item) {
+    this.clearState();
+    this.itemService.updateItem(item);
+  }
+
+  deleteItem(event, item: Item) {
+    this.clearState();
     this.itemService.deleteItem(item);
+  }
+
+  editItem(event, item: Item) {
+    this.editState = true;
+    this.itemToEdit = item;
+  }
+
+  clearState() {
+    this.editState = false;
+    this.itemToEdit = null;
   }
 
 }

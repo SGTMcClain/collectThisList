@@ -2,7 +2,42 @@
   <ul *ngFor="let item of items" class="collection">
     <li class="collection-item">
       <strong>{{item.title}}</strong>: {{item.description}}, {{item.collectorName}}, {{item.isCollected}}
-      <span (click)="deleteItem($event, item)" style="float:right;" class="clickable">x</span>
+      <a href="#" class="secondary-content">
+        <i (click)="editItem($event, item)" class="fa fa-pencil"></i>
+        <i *ngIf="editState && itemToEdit.id == item.id" (click)="clearState()" class="fa fa-compress"></i>
+      </a>
+      
+      <div *ngIf="editState && itemToEdit.id == item.id">
+        <form (ngSubmit)= "updateItem(item)">
+            <div class="row">
+                <div class="input-field col s2">
+                  <input type="text" placeholder= "New Title" [(ngModel)]="item.title" name="title"/>
+            
+                </div>
+                <div class="input-field col s4">
+                  <input type="text"  placeholder="New Description" [(ngModel)]="item.description" name="description" />
+            
+                </div>
+                <div class="input-field col s4">
+                    <input type="text" placeholder="New Collector" [(ngModel)]="item.collectorName" name="collectorName" />
+            
+                  </div>
+                  <div class="switch input-field col s2">
+                    <label> No
+                      <input type="checkbox"  [(ngModel)]="item.isCollected" name="isCollected">
+                      <span class="lever"></span>
+                      Yes
+                    </label>
+                  </div>
+                <div class="row col s12">
+                  <input type="submit" value="Update" class="btn orange">
+                  <button (click) = "deleteItem($event, item)" class="btn red">Delete Item</button>
+                </div>
+              </div>
+        </form>
+      </div>
+
+
     </li>
   </ul>
 </div>
