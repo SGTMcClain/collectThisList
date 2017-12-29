@@ -3,15 +3,26 @@
     <span class="card-title">Add Item</span>
     <form (ngSubmit)="onSubmit()" class="col s6">
       <div class="row">
-        <div class="input-field col s6">
-          <input type="text" placeholder="Add Title" [(ngModel)]="item.title" name="title">
+        <div class="input-field col s2">
+          <input type="text" placeholder="Add Title" [(ngModel)]="item.title" name="title"/>
           <label>Title</label>
         </div>
-        <div class="input-field col s6">
-          <input type="text" placeholder="Add Description" [(ngModel)]="item.description" name="description">
+        <div class="input-field col s4">
+          <input type="text" placeholder="Add Description" [(ngModel)]="item.description" name="description" />
           <label>Description</label>
         </div>
-        <input type="submit" value="Submit" class="btn">
+        <div class="input-field col s4">
+            <input type="text" placeholder="Who's Collecting?" [(ngModel)]="item.collectorName" name="collectorName" />
+            <label>Name</label>
+          </div>
+          <div class="switch input-field col s2">
+            <label> No
+              <input type="checkbox"  [(ngModel)]="item.isCollected" name="isCollected">
+              <span class="lever"></span>
+              Yes
+            </label>
+          </div>
+        <div class="row col s12"><input type="submit" value="Submit" class="btn"></div>
       </div>
     </form>
   </div>
